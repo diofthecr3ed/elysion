@@ -1,5 +1,5 @@
 from docx import Document
-from docx.shared import Inches,Pt
+from docx.shared import Inches,Pt,Cm
 from docx2pdf import convert
 # initialise
 document = Document()
@@ -15,7 +15,7 @@ teacher_name="Sana Kapur"
 
 # document
 p = document.add_paragraph("")
-document.add_picture('header.png', width=Inches(5))
+document.add_picture('header.png', width=Inches(6))
 
 p = document.add_paragraph("")
 run = p.add_run(date)
@@ -48,7 +48,9 @@ records = (
     )
 
 table = document.add_table(rows=1, cols=2)
+table.style= "Table Grid"
 hdr_cells = table.rows[0].cells
+
 hdr_cells[0].text = 'Subjects'
 hdr_cells[1].text = "Grade " + grade
 hdr_cells[1].paragraphs[0].alignment = 1
@@ -74,7 +76,8 @@ paragraph = hdr_cells[1].paragraphs[0]
 run = paragraph.runs
 font = run[0].font
 font.size = Pt(12)
-
+for row in table.rows:
+    row.height = Cm(0.7)
 document.add_picture('sign.png', width=Inches(1))
 
 p = document.add_paragraph("")

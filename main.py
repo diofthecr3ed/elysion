@@ -5,10 +5,10 @@ from docx2pdf import convert
 document = Document()
 
 # variables
-name= "AADI JAIN"
+name= "TARAN SINGH"
 grade = "XI"
 subject1, subject2, subject3, subject4, subject5, subject6='Math', 'Physics', 'Chemistry', 'English', 'Computer Science', '6th Subject'
-percentage1, percentage2, percentage3, percentage4, percentage5, percentage6 = '1', '2', '3', '4', '5', "6"
+percentage1, percentage2, percentage3, percentage4, percentage5, percentage6 = '1', '8', '3', '4', '5', "6"
 date = 'September 30, 2022'
 session = "2021-22"
 teacher_name="Sana Kapur"

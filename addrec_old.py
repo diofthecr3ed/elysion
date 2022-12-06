@@ -2,8 +2,8 @@ import pandas as pd
 import csv
 import createpdf
 
-def reformat(target_file):
-    f1 = open(target_file, 'r', newline="")
+def reformat():
+    f1 = open('registers/IX F T1.csv', 'r', newline="")
     f2 = open('registers/temp.csv', 'w', newline="")
     myreader = csv.reader(f1)
     mywriter = csv.writer(f2)
@@ -14,35 +14,23 @@ def reformat(target_file):
         if i[0] == "Student/Subject":
             check = 1
             x = ["S. No", "Student name", "Admission number"]
-            step = 4
-            #dynamically add value of step here due to new registers having more criteria for marking total (basically del kitni jagah daalna hai)
-            for j in range(3, len(i), step):
-
+            for j in range(3, len(i), 4):
                 x.append("Del")
                 x.append("Del")
                 x.append("Del")
-
                 x.append(i[j])
+            print(x)
             mywriter.writerow(x)
     f1.close()
     f2.close()
     data = pd.read_csv('registers/temp.csv', sep=',')
     filtered_cols = [i for i in data.columns if not i.startswith("Del") if not i.startswith("S.")]
-    data[filtered_cols].to_csv('registers/IX F T2 rf.csv')
+    data[filtered_cols].to_csv('registers/IX F T1 rf.csv')
 
 
 def makedict():
-    data = pd.read_csv('registers/IX F T2 rf.csv')
+    data = pd.read_csv('registers/IX F T1 rf.csv')
     data = data.to_dict(orient='records')
-    for i in data:
-        tempx = []
-        for j in i.keys():
-            if i[j] != i[j]:
-                tempx.append(j)
-
-        for j in tempx:
-            del i[j]
-        
     return data
     #for i in data[1:]:
     #    print(i)
@@ -52,24 +40,9 @@ def makedict():
 # test program loop that generates pdfs in results folder (working now)
 def grade9():
     data_test= makedict()
-    for i in data_test:
-        for j in i.keys():
-            if type(i[j]) is str:
-                i[j] = i[j][0:-3]
-    print(data_test)
     for i in range(1,len(data_test)):
             data_values_test = list(data_test[i].values())
             nameandfile = data_values_test[1]
             createpdf.createpdfs_grade9(nameandfile.upper(),data_test[i],nameandfile)
 
-def grade11():
-    data_test= makedict()
-    for i in data_test:
-        for j in i.keys():
-            if type(i[j]) is str:
-                i[j] = i[j][0:-3]
-    print(data_test)
-    for i in range(1,len(data_test)):
-            data_values_test = list(data_test[i].values())
-            nameandfile = data_values_test[1]
-            createpdf.createpdfs_grade11(nameandfile.upper(),data_test[i],nameandfile)
+grade9()

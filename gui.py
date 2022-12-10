@@ -18,17 +18,20 @@ def display_text():
 def master_9():
    global entry
    string = entry.get()
-   addrec.reformat(string)
-   addrec.grade9()
+   var1 = addrec.reformat(string)
+   addrec.grade9(var1)
 
 def master_11():
    global entry2
    string = entry2.get()
-   addrec.reformat(string)
-   addrec.grade11()
+   var1 = addrec.reformat(string)
+   addrec.grade11(var1)
 
 def master_12():
-   pass
+   global entry3
+   string = entry3.get()
+   var1 = addrec.reformat(string)
+   addrec.grade12(var1)
 
 #Initialize a Label to display the User Input
 label=Label(win, text="", font=("Courier 22 bold"))
@@ -58,6 +61,10 @@ ttk.Button(win, text= "Generate Transcripts",width= 20, command=master_11).pack(
 
 label4=Label(win, text="Grade 12", font=("Courier 22 bold"))
 label4.pack()
+entry3= Entry(win, width= 40)
+entry3.focus_set()
+entry3.pack()
+entry3.insert(0, "<Enter register filepath>")
 ttk.Button(win, text= "Generate Transcripts",width= 20, command=master_12).pack(pady=20)
 
 
